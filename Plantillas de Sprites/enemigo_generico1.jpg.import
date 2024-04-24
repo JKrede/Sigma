@@ -2,25 +2,25 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Garou_caminando.png-96e7d57631a4481be8d0f97bb87c419f.stex"
+path="res://.import/enemigo_generico1.jpg-f6d45a652b0e773c9e8ed4ea479d1790.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites de Garou/Garou_caminando.png"
-dest_files=[ "res://.import/Garou_caminando.png-96e7d57631a4481be8d0f97bb87c419f.stex" ]
+source_file="res://Plantillas de Sprites/enemigo_generico1.jpg"
+dest_files=[ "res://.import/enemigo_generico1.jpg-f6d45a652b0e773c9e8ed4ea479d1790.stex" ]
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

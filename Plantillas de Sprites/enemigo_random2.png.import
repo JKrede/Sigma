@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemigo_random2.png-e9a3c193501475a6cce9aa3836eb794b.stex"
+path="res://.import/enemigo_random2.png-5c9cc02a53d1b542026b5b636abd9aa4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/enemigo_random2.png"
-dest_files=[ "res://.import/enemigo_random2.png-e9a3c193501475a6cce9aa3836eb794b.stex" ]
+source_file="res://Plantillas de Sprites/enemigo_random2.png"
+dest_files=[ "res://.import/enemigo_random2.png-5c9cc02a53d1b542026b5b636abd9aa4.stex" ]
 
 [params]
 

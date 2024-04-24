@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemigo_generico1.jpg-333c79ec05ae84f2ec6e417bb773d47a.stex"
+path="res://.import/enemigo_generico3.jpg-72999ce183c6293c27cd1ad575b955b3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/enemigo_generico1.jpg"
-dest_files=[ "res://.import/enemigo_generico1.jpg-333c79ec05ae84f2ec6e417bb773d47a.stex" ]
+source_file="res://Plantillas de Sprites/enemigo_generico3.jpg"
+dest_files=[ "res://.import/enemigo_generico3.jpg-72999ce183c6293c27cd1ad575b955b3.stex" ]
 
 [params]
 

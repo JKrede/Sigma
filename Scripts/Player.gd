@@ -1,17 +1,22 @@
 extends KinematicBody2D
 
-const moveSpeed=10
-const maxSpeed=100
-const jumpHeight=-300
-
+const moveSpeed=100
+const maxSpeed=200
+const jumpHeight=-400
+const maxLife=100
+const maxVidas=5
+const gravity=10
 const up=Vector2(0,-1)
-const gravity=10;
+const inicio=Vector2(1,1)
 
 onready var sprite=$Sprite
 onready var animationPlayer=$AnimationPlayer
+
+var enemyIsNear =false
+var enemy=null
 var isAttacking=false #Variable que indica si el pj esta atacando
-
-
+var actualLife=maxLife #Vida actual del pj
+var actualVidas=maxVidas-2
 var motion=Vector2()
  
 func _physics_process(delta):
@@ -40,29 +45,45 @@ func _physics_process(delta):
 		
 		if motion.x==0 and not isAttacking:
 			animationPlayer.play("Idle")
+		
 	else:
 		if friction==true:
 			motion.x=lerp(motion.x,0,1)
 		if motion.y<0 and not isAttacking:
 			animationPlayer.play("Fall")
-			
+		
 	if Input.is_action_pressed("ui_at1")  and not isAttacking:
 		animationPlayer.play("Punch")
 		isAttacking=true
-		##Aca iria el efecto de esto
-		_on_AttackingFinished()
+		if enemyIsNear:
+			enemy.actualLife-=50
+		_on_attack_finished()
 		
 	if Input.is_action_pressed("ui_at2") and not isAttacking:
 		animationPlayer.play("Kick")
 		isAttacking=true
-		##Aca iria el efecto de esto
-		_on_AttackingFinished()
-		
+		if enemyIsNear:
+			enemy.actualLife-=200
+		_on_attack_finished()
 		
 		
 	motion=move_and_slide(motion,up)
+
+#Signals of DeadArea
+func _on_DeadArea_body_entered(body):
+	set_global_position(inicio)
+	actualVidas-=1
+	print(actualVidas)
 	
-	
-func _on_AttackingFinished():
-	yield(get_tree().create_timer(1), "timeout") #Funcion que pausa
-	isAttacking=false #							la ejecucion de codigo durante 1 seg
+#Signals of AttackArea
+func _on_AttackArea_body_entered(body):
+	enemy=body
+	enemyIsNear=true
+
+func _on_AttackArea_body_exited(body):
+	enemy=null
+	enemyIsNear=false
+
+func _on_attack_finished():
+	yield(get_tree().create_timer(0.7), "timeout")
+	isAttacking=false

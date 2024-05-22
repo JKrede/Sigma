@@ -37,6 +37,7 @@ enabled=PoolStringArray( "res://addons/gut/plugin.cfg" )
 [global]
 
 layer=false
+idioma=false
 
 [gui]
 

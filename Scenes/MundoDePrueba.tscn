@@ -1,13 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Tiles/tile_0001.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/MENUPAUSA.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/CoinOro.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/CoinPlata.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Bebida.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Sushi.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Origi.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Ramen.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/PergaminoAzul2D.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/PergaminoRojo2D.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/PergaminoVerde2D.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/PergaminoAmarillo2D.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Vida2D.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/DeadArea.tscn" type="PackedScene" id=16]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=5]
 0/name = "tile_0001.png 0"
+0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 16, 16 )
@@ -16,67 +31,105 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 1 )
+0/shape = SubResource( 4 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
-1/name = "tile_0000.png 1"
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 16, 16 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 2042.25, 32.25 )
 
 [node name="Mundo" type="Node2D"]
-position = Vector2( -92, 20 )
+position = Vector2( 335, -110 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( -148, -346 )
-tile_set = SubResource( 2 )
+tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 131122, 0, 0, 131123, 0, 0, 131124, 0, 0, 131125, 0, 0, 131126, 0, 0, 131135, 0, 0, 131136, 0, 0, 131137, 0, 0, 131138, 0, 0, 131139, 0, 0, 327722, 0, 0, 327723, 0, 0, 327724, 0, 0, 327725, 0, 0, 393288, 0, 0, 393289, 0, 0, 393290, 0, 0, 393291, 0, 0, 720929, 0, 0, 720930, 0, 0, 720931, 0, 0, 720932, 0, 0, 852047, 0, 0, 852048, 0, 0, 852049, 0, 0, 852050, 0, 0, 983065, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983128, 0, 0, 983129, 0, 0, 983130, 0, 0, 983131, 0, 0, 1114238, 1, 0, 1114244, 0, 0, 1114280, 0, 0, 1179747, 1, 0, 1179773, 1, 0, 1179774, 1, 0, 1179780, 0, 0, 1179816, 0, 0, 1245283, 1, 0, 1245309, 1, 0, 1245316, 0, 0, 1245352, 0, 0, 1310819, 1, 0, 1310843, 1, 0, 1310844, 1, 0, 1310845, 1, 0, 1310852, 0, 0, 1310888, 0, 0, 1376278, 0, 0, 1376279, 0, 0, 1376280, 0, 0, 1376281, 0, 0, 1376282, 0, 0, 1376283, 0, 0, 1376284, 0, 0, 1376285, 0, 0, 1376286, 0, 0, 1376287, 0, 0, 1376288, 0, 0, 1376289, 0, 0, 1376290, 0, 0, 1376291, 0, 0, 1376292, 0, 0, 1376293, 0, 0, 1376294, 0, 0, 1376295, 0, 0, 1376296, 0, 0, 1376297, 0, 0, 1376298, 0, 0, 1376299, 0, 0, 1376300, 0, 0, 1376301, 0, 0, 1376302, 0, 0, 1376303, 0, 0, 1376304, 0, 0, 1376305, 0, 0, 1376306, 0, 0, 1376307, 0, 0, 1376308, 0, 0, 1376309, 0, 0, 1376310, 0, 0, 1376311, 0, 0, 1376312, 0, 0, 1376313, 0, 0, 1376314, 0, 0, 1376315, 0, 0, 1376316, 0, 0, 1376317, 0, 0, 1376318, 0, 0, 1376319, 0, 0, 1376320, 0, 0, 1376321, 0, 0, 1376322, 0, 0, 1376323, 0, 0, 1376324, 0, 0, 1376325, 0, 0, 1376326, 0, 0, 1376327, 0, 0, 1376328, 0, 0, 1376329, 0, 0, 1376330, 0, 0, 1376331, 0, 0, 1376332, 0, 0, 1376333, 0, 0, 1376334, 0, 0, 1376335, 0, 0, 1376336, 0, 0, 1376337, 0, 0, 1376355, 1, 0, 1376356, 0, 0, 1376357, 0, 0, 1376358, 0, 0, 1376359, 0, 0, 1376360, 0, 0, 1376361, 0, 0, 1376362, 0, 0, 1376363, 0, 0, 1376364, 0, 0, 1376365, 0, 0, 1376366, 0, 0, 1376367, 0, 0, 1376368, 0, 0, 1376369, 0, 0, 1376370, 0, 0, 1376371, 0, 0, 1376372, 0, 0, 1376373, 0, 0, 1376374, 0, 0, 1376375, 0, 0, 1376376, 0, 0, 1376377, 0, 0, 1376378, 0, 0, 1376379, 0, 0, 1376380, 0, 0, 1376388, 0, 0, 1376389, 0, 0, 1376390, 0, 0, 1376391, 0, 0, 1376392, 0, 0, 1376393, 0, 0, 1376394, 0, 0, 1376395, 0, 0, 1376396, 0, 0, 1376397, 0, 0, 1376398, 0, 0, 1376399, 0, 0, 1376400, 0, 0, 1376401, 0, 0, 1376402, 0, 0, 1376403, 0, 0, 1376404, 0, 0, 1376405, 0, 0, 1376406, 0, 0, 1376407, 0, 0, 1376408, 0, 0, 1376409, 0, 0, 1376410, 0, 0, 1376411, 0, 0, 1376412, 0, 0, 1376413, 0, 0, 1376414, 0, 0, 1376415, 0, 0, 1376416, 0, 0, 1376417, 0, 0, 1376418, 0, 0, 1376419, 0, 0, 1376420, 0, 0, 1376421, 0, 0, 1376422, 0, 0, 1376423, 0, 0, 1376424, 0, 0, 1441803, 0, 0, 1441804, 0, 0, 1441805, 0, 0, 1441806, 0, 0, 1441807, 0, 0, 1441808, 0, 0, 1441809, 0, 0, 1441810, 0, 0, 1441811, 0, 0, 1441812, 0, 0, 1441813, 0, 0, 1441814, 0, 0, 1441874, 0, 0, 1441875, 0, 0, 1441876, 0, 0, 1441877, 0, 0, 1441878, 0, 0, 1441879, 0, 0, 1441880, 0, 0, 1441881, 0, 0, 1441882, 0, 0, 1441883, 0, 0, 1441884, 0, 0, 1441885, 0, 0 )
-
-[node name="Enemy1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1544, 1032 )
+tile_data = PoolIntArray( 983105, 0, 0, 983106, 0, 0, 983107, 0, 0, 983108, 0, 0, 983109, 0, 0, 983110, 0, 0, 983111, 0, 0, 983112, 0, 0, 983113, 0, 0, 983114, 0, 0, 983115, 0, 0, 983116, 0, 0, 1310739, 0, 0, 1310740, 0, 0, 1310741, 0, 0, 1310742, 0, 0, 1310743, 0, 0, 1310744, 0, 0, 1310745, 0, 0, 1310746, 0, 0, 1310747, 0, 0, 1310748, 0, 0, 1310749, 0, 0, 1310750, 0, 0, 1441844, 0, 0, 1441845, 0, 0, 1441846, 0, 0, 1441847, 0, 0, 1441848, 0, 0, 1441849, 0, 0, 1441850, 0, 0, 1441851, 0, 0, 1441852, 0, 0, 1441853, 0, 0, 1441854, 0, 0, 1507412, 0, 0, 1507413, 0, 0, 1507414, 0, 0, 1507415, 0, 0, 1507416, 0, 0, 1507417, 0, 0, 1507418, 0, 0, 1507419, 0, 0, 1507420, 0, 0, 1507421, 0, 0, 1507422, 0, 0, 1572959, 0, 0, 1572960, 0, 0, 1572961, 0, 0, 1703940, 0, 0, 1703941, 0, 0, 1703942, 0, 0, 1703943, 0, 0, 1703944, 0, 0, 1703945, 0, 0, 1703946, 0, 0, 1703947, 0, 0, 1703948, 0, 0, 2228208, 0, 0, 2228209, 0, 0, 2228210, 0, 0, 2228211, 0, 0, 2228212, 0, 0, 2228213, 0, 0, 2228214, 0, 0, 2228215, 0, 0, 2228216, 0, 0, 2228217, 0, 0, 2228218, 0, 0, 2228219, 0, 0, 2228220, 0, 0, 2228221, 0, 0, 2228222, 0, 0, 2228223, 0, 0, 2162688, 0, 0, 2162689, 0, 0, 2162690, 0, 0, 2162691, 0, 0, 2162692, 0, 0, 2162693, 0, 0, 2162694, 0, 0, 2162695, 0, 0, 2162696, 0, 0, 2162697, 0, 0, 2162698, 0, 0, 2162699, 0, 0, 2162700, 0, 0, 2162701, 0, 0, 2162702, 0, 0, 2162703, 0, 0, 2162704, 0, 0, 2162705, 0, 0, 2162706, 0, 0, 2162707, 0, 0, 2162708, 0, 0, 2162709, 0, 0, 2162710, 0, 0, 2162711, 0, 0, 2162712, 0, 0, 2162713, 0, 0, 2162714, 0, 0, 2162715, 0, 0, 2162716, 0, 0, 2162717, 0, 0, 2162718, 0, 0, 2162719, 0, 0, 2162720, 0, 0, 2162721, 0, 0, 2162722, 0, 0, 2162723, 0, 0, 2162724, 0, 0, 2162725, 0, 0, 2162726, 0, 0, 2162727, 0, 0, 2162728, 0, 0, 2162729, 0, 0, 2162730, 0, 0, 2162731, 0, 0, 2162732, 0, 0, 2162733, 0, 0, 2162734, 0, 0, 2162735, 0, 0, 2162736, 0, 0, 2162737, 0, 0, 2162738, 0, 0, 2162739, 0, 0, 2162740, 0, 0, 2162741, 0, 0, 2162742, 0, 0, 2162743, 0, 0, 2162744, 0, 0, 2162745, 0, 0, 2162746, 0, 0, 2162747, 0, 0, 2162748, 0, 0, 2162749, 0, 0, 2162750, 0, 0, 2162751, 0, 0, 2162752, 0, 0, 2162753, 0, 0, 2162754, 0, 0, 2162755, 0, 0, 2162756, 0, 0, 2162757, 0, 0, 2162758, 0, 0, 2162759, 0, 0, 2162760, 0, 0, 2162761, 0, 0, 2162762, 0, 0, 2162763, 0, 0, 2162764, 0, 0, 2162765, 0, 0, 2162766, 0, 0, 2162767, 0, 0, 2162768, 0, 0, 2162769, 0, 0, 2162770, 0, 0, 2162771, 0, 0, 2162772, 0, 0, 2162773, 0, 0, 2162774, 0, 0, 2162775, 0, 0, 2162776, 0, 0, 2162777, 0, 0, 2162778, 0, 0, 2162779, 0, 0, 2162780, 0, 0, 2162781, 0, 0, 2162782, 0, 0, 2162783, 0, 0, 2162784, 0, 0, 2162785, 0, 0, 2162786, 0, 0, 2162787, 0, 0, 2162788, 0, 0, 2162789, 0, 0, 2162790, 0, 0, 2162791, 0, 0, 2162792, 0, 0, 2162793, 0, 0, 2162794, 0, 0, 2162795, 0, 0, 2162796, 0, 0, 2162797, 0, 0, 2162798, 0, 0, 2162799, 0, 0, 2162800, 0, 0, 2162801, 0, 0, 2162802, 0, 0, 2162803, 0, 0, 2162804, 0, 0, 2162805, 0, 0, 2162806, 0, 0, 2162807, 0, 0, 2162808, 0, 0, 2162809, 0, 0, 2162810, 0, 0, 2162811, 0, 0, 2162812, 0, 0, 2162813, 0, 0, 2162814, 0, 0, 2162815, 0, 0, 2162816, 0, 0, 2162817, 0, 0, 2162818, 0, 0, 2162819, 0, 0, 2162820, 0, 0, 2162821, 0, 0, 2162822, 0, 0, 2162823, 0, 0, 2162824, 0, 0, 2162825, 0, 0, 2162826, 0, 0, 2162827, 0, 0, 2162828, 0, 0, 2162829, 0, 0, 2162830, 0, 0, 2162831, 0, 0, 2162832, 0, 0, 2162833, 0, 0, 2162834, 0, 0, 2162835, 0, 0, 2162836, 0, 0, 2162837, 0, 0, 2162838, 0, 0, 2162839, 0, 0, 2162840, 0, 0, 2162841, 0, 0, 2162842, 0, 0, 2162843, 0, 0, 2162844, 0, 0, 2162845, 0, 0, 2162846, 0, 0, 2162847, 0, 0, 2162848, 0, 0, 2162849, 0, 0, 2162850, 0, 0, 2162851, 0, 0, 2162852, 0, 0, 2162853, 0, 0, 2162854, 0, 0, 2162855, 0, 0, 2162856, 0, 0, 2162857, 0, 0, 2162858, 0, 0, 2162859, 0, 0, 2162860, 0, 0, 2162861, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 161, -129 )
+position = Vector2( 1009, -197 )
 collision_mask = 27
 
-[node name="Enemy2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 548, -85 )
+[node name="MenuPausa" type="CanvasLayer" parent="."]
 
-[node name="Enemy3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1777, -54 )
+[node name="MENUPAUSA" parent="MenuPausa" instance=ExtResource( 4 )]
+visible = false
+
+[node name="CoinOro" parent="." instance=ExtResource( 5 )]
+position = Vector2( 666, 149 )
+
+[node name="CoinPlata" parent="." instance=ExtResource( 6 )]
+position = Vector2( 706, 151 )
+
+[node name="Sushi" parent="." instance=ExtResource( 8 )]
+position = Vector2( 457, 154 )
+
+[node name="Bebida" parent="." instance=ExtResource( 7 )]
+position = Vector2( 285, 157 )
+
+[node name="Ramen" parent="." instance=ExtResource( 10 )]
+position = Vector2( 401, 154 )
+
+[node name="Origi" parent="." instance=ExtResource( 9 )]
+position = Vector2( 341, 156 )
+
+[node name="PergaminoAzul2D" parent="." instance=ExtResource( 11 )]
+position = Vector2( 623, 151 )
+
+[node name="PergaminoRojo2D" parent="." instance=ExtResource( 12 )]
+position = Vector2( 503, 151 )
+
+[node name="PergaminoVerde2D" parent="." instance=ExtResource( 13 )]
+position = Vector2( 583, 150 )
+
+[node name="PergaminoAmarillo2D" parent="." instance=ExtResource( 14 )]
+position = Vector2( 544, 149 )
+
+[node name="Vida2D" parent="." instance=ExtResource( 15 )]
+position = Vector2( 452, 46 )
+
+[node name="CoinOro2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 191, -60 )
+
+[node name="CoinOro3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 306, -70 )
+
+[node name="CoinPlata2" parent="." instance=ExtResource( 6 )]
+position = Vector2( -37, -8 )
+
+[node name="CoinPlata3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1075, 37 )
+
+[node name="Origi2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1226, -18 )
+
+[node name="PergaminoAzul2D2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1718, 49 )
+
+[node name="Ramen2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1794, 106 )
+
+[node name="Vida2D2" parent="." instance=ExtResource( 15 )]
+position = Vector2( 1314, -18 )
+
+[node name="Vida2D3" parent="." instance=ExtResource( 15 )]
+position = Vector2( 1200, 125 )
+
+[node name="Enemy1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 758, -175 )
 
 [node name="Enemy4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2445, -64 )
+position = Vector2( 1313, -110 )
 
-[node name="DeadArea" type="Area2D" parent="."]
-position = Vector2( 609, -507 )
-collision_layer = 16
-collision_mask = 0
+[node name="Enemy3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 117, 116 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadArea"]
-position = Vector2( 680, 752 )
-shape = SubResource( 3 )
-
-[connection signal="body_entered" from="DeadArea" to="Player" method="_on_DeadArea_body_entered"]
+[node name="DeadArea" parent="." instance=ExtResource( 16 )]
+position = Vector2( -90, -110 )

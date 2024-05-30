@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23, 39 )
+extents = Vector2( 20, 37 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Attack"
@@ -273,18 +273,18 @@ tracks/3/keys = {
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 339.313, 143.875 )
 
-[sub_resource type="CapsuleShape2D" id=8]
-radius = 31.0
-height = 23.0
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 24.0
+height = 28.0
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
-position = Vector2( 19, -38 )
+[node name="KinematicBody2D" type="KinematicBody2D" groups=["save"]]
+position = Vector2( 3, -35 )
 collision_layer = 4
 collision_mask = 49
 script = ExtResource( 5 )
 __meta__ = {
-"_edit_horizontal_guides_": [ -60.0 ],
-"_edit_vertical_guides_": [ 40.0 ]
+"_edit_horizontal_guides_": [ -75.0, 0.0 ],
+"_edit_vertical_guides_": [ -20.0, 20.0 ]
 }
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -294,8 +294,11 @@ texture = ExtResource( 1 )
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3, -5 )
+position = Vector2( -3, -3 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -306,23 +309,29 @@ anims/RESET = SubResource( 3 )
 anims/Walk = SubResource( 4 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
-position = Vector2( -1, 0 )
+position = Vector2( -4, 2 )
 collision_layer = 8
 collision_mask = 8
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2( 1, -109.125 )
+position = Vector2( 0, -5 )
 shape = SubResource( 9 )
 
 [node name="AttackArea" type="Area2D" parent="."]
-position = Vector2( -1, 0 )
+position = Vector2( -5, 0 )
 collision_layer = 8
 collision_mask = 8
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2( -1, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]

@@ -17,6 +17,10 @@ var enemy=null #Indica el cuerpo del enemigo que ese encuentra en rango de ataqu
 var isAlive=true #Indica si el jugador esta vivo
 var isAttacking=false #Indica si el pj esta atacando
 var actualLife=maxLife #Vida actual del pj
+var isTakingDamage=false
+const maxvidas=maxVidas
+var vidas=maxvidas
+
 var motion=Vector2()
  
 func _physics_process(delta):
@@ -43,7 +47,7 @@ func _physics_process(delta):
 		if motion.x!=0:
 			animationPlayer.play("Walk")
 		
-		if motion.x==0 and not isAttacking:
+		if motion.x==0 and not isAttacking and not isTakingDamage:
 			animationPlayer.play("Idle")
 		
 	else:
@@ -53,7 +57,7 @@ func _physics_process(delta):
 			animationPlayer.play("Fall")
 		
 	attack()
-	
+	live_check()
 	motion=move_and_slide(motion,up)
 	
 
@@ -67,20 +71,27 @@ func attack():
 	if Input.is_action_pressed("ui_at2") and not isAttacking:
 		animationPlayer.play("Kick")
 
-#Actualiza la vida del Player y verifica si muere
+#Actualiza la vida del Player
 func take_damage(damageTaken):
+	animationPlayer.play("TakingDamage")
 	actualLife-=damageTaken
 	if actualLife<0:
 		actualLife=0
+		
+#Verifica si el player muere
+func live_check():
 	if actualLife==0:
 		isAlive=false
 	if not isAlive:
 		set_global_position(inicio)
 		actualLife=maxLife
+		vidas-=1
+		isAlive=true
 
 #Signals of DeadArea
-func _on_DeadArea_body_entered(body):
-	set_global_position(inicio)
+func _on_DeadArea_area_entered(area):
+		set_global_position(inicio)
+		vidas-=1
 	
 #Signals of AttackArea
 func _on_AttackArea_body_entered(body):
@@ -94,6 +105,8 @@ func _on_AttackArea_body_exited(body):
 func _on_AnimationPlayer_animation_started(anim_name):
 	if anim_name == "Punch" or anim_name == "Kick":
 		isAttacking=true
+	if anim_name == "TakingDamage":
+		isTakingDamage=true
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Punch":
@@ -104,3 +117,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		if enemyIsNear:
 			enemy.take_damage(200)
 		isAttacking=false
+	if anim_name == "TakingDamage":
+		isTakingDamage=false

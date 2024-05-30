@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="TP"
-run/main_scene="res://Scenes/MundoDePrueba.tscn"
+run/main_scene="res://Scenes/Mundo1.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]

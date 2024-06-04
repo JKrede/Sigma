@@ -15,10 +15,10 @@ func after_each():
 
 func test_take_damage():
 	player.take_damage(50)
-	assert_eq(player.actualLife, player.maxLife - 50, "La vida del jugador debería disminuir después de recibir daño")
+	assert_eq(Global.actualLife, Global.maxLife - 50, "La vida del jugador debería disminuir después de recibir daño")
 
 func test_player_dies():
 	# Simula la muerte del jugador
-	player.take_damage(player.maxLife)
+	player.take_damage(Global.maxLife)
 	player._physics_process(0.1)
-	assert_eq(player.vidas, player.maxVidas - 1, "La cantidad de vidas del jugador debería disminuir")
+	assert_eq(Global.contador_vida, Global.maxVidas - 1, "La cantidad de vidas del jugador debería disminuir")

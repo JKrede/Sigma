@@ -1,10 +1,9 @@
 extends KinematicBody2D
+class_name Player
 
 const moveSpeed=100
-const maxSpeed=200
-const jumpHeight=-400
-const maxLife=100
-const maxVidas=5
+const maxSpeed=150
+const jumpHeight=-310
 const gravity=10
 const up=Vector2(0,-1)
 const inicio=Vector2(1,1)
@@ -16,10 +15,7 @@ var enemyIsNear=false #Indica si algun enemigo que ese encuentra en rango de ata
 var enemy=null #Indica el cuerpo del enemigo que ese encuentra en rango de ataque
 var isAlive=true #Indica si el jugador esta vivo
 var isAttacking=false #Indica si el pj esta atacando
-var actualLife=maxLife #Vida actual del pj
 var isTakingDamage=false
-const maxvidas=maxVidas
-var vidas=maxvidas
 
 var motion=Vector2()
  
@@ -74,24 +70,27 @@ func attack():
 #Actualiza la vida del Player
 func take_damage(damageTaken):
 	animationPlayer.play("TakingDamage")
-	actualLife-=damageTaken
-	if actualLife<0:
-		actualLife=0
+	Global.actualLife-=damageTaken
+	if Global.actualLife<0:
+		Global.actualLife=0
 		
 #Verifica si el player muere
 func live_check():
-	if actualLife==0:
+	if Global.actualLife==0:
 		isAlive=false
 	if not isAlive:
+		Global.contador_vida-=1
+		if Global.contador_vida==0:
+			print("Game over putito")
+		Global.actualLife=Global.maxLife
 		set_global_position(inicio)
-		actualLife=maxLife
-		vidas-=1
+		print(Global.contador_vida)
 		isAlive=true
 
 #Signals of DeadArea
 func _on_DeadArea_area_entered(area):
 		set_global_position(inicio)
-		vidas-=1
+		Global.contador_vida-=1
 	
 #Signals of AttackArea
 func _on_AttackArea_body_entered(body):
@@ -119,3 +118,26 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		isAttacking=false
 	if anim_name == "TakingDamage":
 		isTakingDamage=false
+		
+func save_game():
+	return {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"x_pos" : position.x,
+		"y_pos" : position.y,
+		"stats" :{
+			"contador_oro" : Global.contador_oro,
+			"contador_plata" : Global.contador_plata,
+			"contador_vida" : Global.contador_vida,
+			"actualLife" : Global.actualLife,
+			"contador_kills" : Global.contador_kills,
+		}
+	}
+
+func load_game(stats):
+	position = Vector2(stats.x_pos, stats.y_pos)
+	Global.contador_oro = stats.stats.contador_oro
+	Global.contador_plata = stats.stats.contador_plata
+	Global.contador_vida = stats.stats.contador_vida
+	Global.actualLife = stats.stats.actualLife
+	Global.contador_kills = stats.stats.contador_kills

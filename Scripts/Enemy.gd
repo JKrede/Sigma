@@ -74,6 +74,7 @@ func live_check():
 #Borra el enemigo
 func delete_enemy():
 	yield(get_tree().create_timer(0.4), "timeout")
+	Global.contador_kills+=1
 	queue_free()
 
 func _on_AnimationPlayer_animation_started(anim_name):
@@ -99,3 +100,20 @@ func _on_AttackArea_body_entered(body):
 	playerAttack=true
 func _on_AttackArea_body_exited(body):
 	playerAttack=false
+
+func save_game():
+	return {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"x_pos" : position.x,
+		"y_pos" : position.y,
+		"stats" :{
+			"actualLife" : actualLife,
+			"isAlive" : isAlive
+		}
+	}
+
+func load_game(stats):
+	position = Vector2(stats.x_pos, stats.y_pos)
+	actualLife = stats.stats.actualLife
+	isAlive = stats.stats.isAlive

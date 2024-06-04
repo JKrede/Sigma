@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/WooshPunch.mp3-bb9d5423c56d1687229c82d5c37a987e.mp3str"
+
+[deps]
+
+source_file="res://Sounds/FX/WooshPunch.mp3"
+dest_files=[ "res://.import/WooshPunch.mp3-bb9d5423c56d1687229c82d5c37a987e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

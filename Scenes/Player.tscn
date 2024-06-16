@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Sprites de Garou/Garou_saltando.png" type="Texture" id=1]
 [ext_resource path="res://Sprites de Garou/Garou_ataque1.png" type="Texture" id=2]
@@ -7,13 +7,7 @@
 [ext_resource path="res://Sprites de Garou/Garou_ataque2.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=6]
 [ext_resource path="res://Sprites de Garou/Garou_cayendo.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=8]
-[ext_resource path="res://Sprites/Sprite de coleccionables/coin_gold.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Sprite de coleccionables/barra.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Sprite de coleccionables/coin_silver.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Sprite de coleccionables/craneo.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Sprite de coleccionables/pergaminos.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Sprite de coleccionables/heart.png" type="Texture" id=14]
+[ext_resource path="res://Sprites de Garou/Garou_recibiendo_daño.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 15, 30 )
@@ -178,7 +172,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "Kick"
-step = 0.125
+length = 0.6
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -222,7 +217,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
@@ -230,7 +225,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "Punch"
-step = 0.08
+length = 0.8
+step = 0.066
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -274,7 +270,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64, 0.72, 0.8, 0.88 ),
+"times": PoolRealArray( 0, 0.066, 0.132, 0.198, 0.264, 0.33, 0.396, 0.462, 0.528, 0.594, 0.66, 0.726 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
@@ -329,6 +325,58 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "TakingDamage"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -388,200 +436,9 @@ tracks/3/keys = {
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 29.5, 18 )
 
-[sub_resource type="Animation" id=15]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=16]
-resource_name = "Vida"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
-
-[sub_resource type="Animation" id=17]
-resource_name = "Coin"
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=18]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=19]
-resource_name = "Coin"
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=20]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=21]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=22]
-resource_name = "Vida"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
-
-[sub_resource type="Animation" id=23]
-resource_name = "Coin"
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=24]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=25]
-resource_name = "Coin"
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=26]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["save"]]
 position = Vector2( 13, -36 )
+scale = Vector2( 0.7, 0.7 )
 collision_layer = 2
 collision_mask = 11
 script = ExtResource( 6 )
@@ -592,6 +449,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -13, 6 )
+scale = Vector2( 0.7, 0.7 )
 shape = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -602,340 +460,32 @@ anims/Jump = SubResource( 9 )
 anims/Kick = SubResource( 10 )
 anims/Punch = SubResource( 11 )
 anims/RESET = SubResource( 5 )
+anims/TakingDamage = SubResource( 15 )
 anims/Walk = SubResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -10, 3 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 3 )
 hframes = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2( 0.7, 0.7 )
 current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = -80
+limit_bottom = 120
 
 [node name="AttackArea" type="Area2D" parent="."]
 position = Vector2( -14, 5 )
+scale = Vector2( 0.7, 0.7 )
 collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2( 0.5, -10 )
+scale = Vector2( 0.7, 0.7 )
 shape = SubResource( 14 )
-
-[node name="Camera2D2" type="Camera2D" parent="."]
-visible = false
-position = Vector2( -10, -2 )
-script = ExtResource( 8 )
-
-[node name="Vida" type="Sprite" parent="Camera2D2"]
-modulate = Color( 1, 0, 0.188235, 1 )
-position = Vector2( -447.4, 262 )
-scale = Vector2( 3.2, 3.2 )
-texture = ExtResource( 14 )
-hframes = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D2/Vida"]
-autoplay = "Vida"
-anims/RESET = SubResource( 15 )
-anims/Vida = SubResource( 16 )
-
-[node name="Vida2" type="Label" parent="Camera2D2"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = -424.0
-margin_top = 240.0
-margin_right = -384.0
-margin_bottom = 265.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="barra1" type="Sprite" parent="Camera2D2"]
-position = Vector2( -124, 265 )
-scale = Vector2( 0.8, 0.5 )
-texture = ExtResource( 10 )
-vframes = 2
-
-[node name="barra2" type="Sprite" parent="Camera2D2/barra1"]
-position = Vector2( -3.05176e-05, 9.99988 )
-scale = Vector2( 1, 1.025 )
-texture = ExtResource( 10 )
-vframes = 2
-frame = 1
-
-[node name="CoinPlata" type="Sprite" parent="Camera2D2"]
-position = Vector2( 159, 259 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 11 )
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D2/CoinPlata"]
-autoplay = "Coin"
-anims/Coin = SubResource( 17 )
-anims/RESET = SubResource( 18 )
-
-[node name="CoinPlata2" type="Label" parent="Camera2D2"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 187.0
-margin_top = 238.0
-margin_right = 215.0
-margin_bottom = 262.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="CoinOro" type="Sprite" parent="Camera2D2"]
-modulate = Color( 0.941176, 1, 0, 1 )
-self_modulate = Color( 0.941176, 1, 0, 1 )
-position = Vector2( 290, 258 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 9 )
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D2/CoinOro"]
-autoplay = "Coin"
-anims/Coin = SubResource( 19 )
-anims/RESET = SubResource( 20 )
-
-[node name="CoinOro2" type="Label" parent="Camera2D2"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 321.0
-margin_top = 236.0
-margin_right = 349.0
-margin_bottom = 260.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="Kills" type="Sprite" parent="Camera2D2"]
-position = Vector2( 411, 258 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 12 )
-
-[node name="Kills2" type="Label" parent="Camera2D2"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 443.0
-margin_top = 234.0
-margin_right = 471.0
-margin_bottom = 258.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="PergaminoRojo" type="Sprite" parent="Camera2D2"]
-position = Vector2( -447.05, 181.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-
-[node name="PergaminoAmarillo" type="Sprite" parent="Camera2D2"]
-position = Vector2( -390.05, 181.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-frame = 1
-
-[node name="PergaminoVerde" type="Sprite" parent="Camera2D2"]
-position = Vector2( -337.05, 180.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-frame = 2
-
-[node name="PergaminoAzul" type="Sprite" parent="Camera2D2"]
-position = Vector2( -282.05, 181.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-frame = 3
-
-[node name="Camera2Dfullscrean" type="Camera2D" parent="."]
-visible = false
-position = Vector2( -10, -2 )
-script = ExtResource( 8 )
-
-[node name="Vida" type="Sprite" parent="Camera2Dfullscrean"]
-modulate = Color( 1, 0, 0.188235, 1 )
-position = Vector2( -447.4, 313 )
-scale = Vector2( 3.2, 3.2 )
-texture = ExtResource( 14 )
-hframes = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2Dfullscrean/Vida"]
-autoplay = "Vida"
-anims/RESET = SubResource( 21 )
-anims/Vida = SubResource( 22 )
-
-[node name="Vida2" type="Label" parent="Camera2Dfullscrean"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = -424.0
-margin_top = 291.0
-margin_right = -384.0
-margin_bottom = 316.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="barra1" type="Sprite" parent="Camera2Dfullscrean"]
-position = Vector2( -124, 316 )
-scale = Vector2( 0.8, 0.5 )
-texture = ExtResource( 10 )
-vframes = 2
-
-[node name="barra2" type="Sprite" parent="Camera2Dfullscrean/barra1"]
-position = Vector2( -3.05176e-05, 9.99988 )
-scale = Vector2( 1, 1.025 )
-texture = ExtResource( 10 )
-vframes = 2
-frame = 1
-
-[node name="CoinPlata" type="Sprite" parent="Camera2Dfullscrean"]
-position = Vector2( 159, 310 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 11 )
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2Dfullscrean/CoinPlata"]
-autoplay = "Coin"
-anims/Coin = SubResource( 23 )
-anims/RESET = SubResource( 24 )
-
-[node name="CoinPlata2" type="Label" parent="Camera2Dfullscrean"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 187.0
-margin_top = 289.0
-margin_right = 215.0
-margin_bottom = 313.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="CoinOro" type="Sprite" parent="Camera2Dfullscrean"]
-modulate = Color( 0.941176, 1, 0, 1 )
-self_modulate = Color( 0.941176, 1, 0, 1 )
-position = Vector2( 290, 309 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 9 )
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2Dfullscrean/CoinOro"]
-autoplay = "Coin"
-anims/Coin = SubResource( 25 )
-anims/RESET = SubResource( 26 )
-
-[node name="CoinOro2" type="Label" parent="Camera2Dfullscrean"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 321.0
-margin_top = 287.0
-margin_right = 349.0
-margin_bottom = 311.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="Kills" type="Sprite" parent="Camera2Dfullscrean"]
-position = Vector2( 411, 309 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 12 )
-
-[node name="Kills2" type="Label" parent="Camera2Dfullscrean"]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 443.0
-margin_top = 285.0
-margin_right = 471.0
-margin_bottom = 309.0
-rect_scale = Vector2( 2, 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/line_spacing = 0
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-text = "x01"
-align = 1
-valign = 1
-max_lines_visible = 1
-
-[node name="PergaminoRojo" type="Sprite" parent="Camera2Dfullscrean"]
-position = Vector2( -447.05, 232.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-
-[node name="PergaminoAmarillo" type="Sprite" parent="Camera2Dfullscrean"]
-position = Vector2( -390.05, 232.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-frame = 1
-
-[node name="PergaminoVerde" type="Sprite" parent="Camera2Dfullscrean"]
-position = Vector2( -337.05, 231.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-frame = 2
-
-[node name="PergaminoAzul" type="Sprite" parent="Camera2Dfullscrean"]
-position = Vector2( -282.05, 232.75 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 13 )
-hframes = 4
-frame = 3
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]

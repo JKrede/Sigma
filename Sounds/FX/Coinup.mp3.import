@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Coinup.mp3-b12912b67d685487b4f2108b4c28ca3e.mp3str"
+
+[deps]
+
+source_file="res://Sounds/FX/Coinup.mp3"
+dest_files=[ "res://.import/Coinup.mp3-b12912b67d685487b4f2108b4c28ca3e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends Subject
 class_name Player
 
 const moveSpeed=100
-const maxSpeed=200
-const jumpHeight=-400
+const maxSpeed=150
+const jumpHeight=-310
 const gravity=10
 const up=Vector2(0,-1)
-
+const inicio=Vector2(1,1)
 
 onready var sprite=$Sprite
 onready var animationPlayer=$AnimationPlayer
@@ -15,19 +15,25 @@ var enemyIsNear=false #Indica si algun enemigo que ese encuentra en rango de ata
 var enemy=null #Indica el cuerpo del enemigo que ese encuentra en rango de ataque
 var isAlive=true #Indica si el jugador esta vivo
 var isAttacking=false #Indica si el pj esta atacando
+var isTakingDamage=false
 var motion=Vector2()
 
-
+func _ready():
+	var mundo1 = get_parent()
+	if mundo1:
+		for child in mundo1.get_children():
+			if child is Enemy:
+				add_observer(child)
  
 func _physics_process(delta):
 	motion.y+= gravity
 	var friction=false
 	
-	if Input.is_action_pressed("ui_right") and not isAttacking:
+	if Input.is_action_pressed("ui_right") and not isAttacking and not isTakingDamage:
 		sprite.flip_h=false
 		motion.x=min(motion.x+moveSpeed,maxSpeed)
 		
-	elif Input.is_action_pressed("ui_left") and not isAttacking:
+	elif Input.is_action_pressed("ui_left") and not isAttacking and not isTakingDamage:
 		sprite.flip_h=true
 		motion.x=max(motion.x-moveSpeed,-maxSpeed)
 		
@@ -35,54 +41,68 @@ func _physics_process(delta):
 		friction=true
 		
 	if is_on_floor():
-		if Input.is_action_pressed("ui_up") and not isAttacking:
-			motion.y=jumpHeight
-			animationPlayer.play("Jump")
-		if friction==true:
-			motion.x=lerp(motion.x,0,1)
-		if motion.x!=0:
-			animationPlayer.play("Walk")
+		if not isAttacking and not isTakingDamage:
+			if Input.is_action_pressed("ui_up"):
+				motion.y=jumpHeight
+				animationPlayer.play("Jump")
+			if friction==true:
+				motion.x=lerp(motion.x,0,1)
+			if motion.x!=0:
+				animationPlayer.play("Walk")
 		
-		if motion.x==0 and not isAttacking:
-			animationPlayer.play("Idle")
+			if motion.x==0:
+				animationPlayer.play("Idle")
 		
-	else:
-		if friction==true:
-			motion.x=lerp(motion.x,0,1)
-		if motion.y<0 and not isAttacking:
-			animationPlayer.play("Fall")
+		else:
+			if friction==true:
+				motion.x=lerp(motion.x,0,1)
+			if motion.y<0 and not isAttacking:
+				animationPlayer.play("Fall")
 		
 	attack()
-	
+	live_check()
 	motion=move_and_slide(motion,up)
 	
 
 #Realiza el ataque y actualiza valores de vida del enemigo
 func attack():
-	#Punch quita 50 de vida
-	if Input.is_action_pressed("ui_at1")  and not isAttacking:
-		animationPlayer.play("Punch")
+	if not isAttacking and not isTakingDamage:
+		#Punch quita 50 de vida
+		if Input.is_action_pressed("ui_at1"):
+			animationPlayer.play("Punch")
 
-	#Kick quita 200 de vida
-	if Input.is_action_pressed("ui_at2") and not isAttacking:
-		animationPlayer.play("Kick")
+		#Kick quita 200 de vida
+		if Input.is_action_pressed("ui_at2"):
+			animationPlayer.play("Kick")
 
-#Actualiza la vida del Player y verifica si muere
+#Actualiza la vida del Player
 func take_damage(damageTaken):
+	animationPlayer.play("TakingDamage")
 	Global.actualLife-=damageTaken
 	if Global.actualLife<0:
 		Global.actualLife=0
+		
+#Verifica si el player muere
+func live_check():
 	if Global.actualLife==0:
 		isAlive=false
 	if not isAlive:
-		set_global_position(Global.inicio)
-		Global.actualLife=Global.maxLife
 		Global.contador_vida-=1
+		if Global.contador_vida==0:
+			print("Game over")
+		Global.actualLife=Global.maxLife
+		set_global_position(inicio)
+		print(Global.contador_vida)
+		isAlive=true
+	if Global.actualLife<50:
+		notify_observers()
+	if Global.actualLife>=50:
+		notify_observers()
 
 #Signals of DeadArea
-func _on_DeadArea_body_entered(body):
-	set_global_position(Global.inicio)
-	Global.contador_vida-=1
+func _on_DeadArea_area_entered(area):
+		set_global_position(inicio)
+		Global.contador_vida-=1
 	
 #Signals of AttackArea
 func _on_AttackArea_body_entered(body):
@@ -96,16 +116,24 @@ func _on_AttackArea_body_exited(body):
 func _on_AnimationPlayer_animation_started(anim_name):
 	if anim_name == "Punch" or anim_name == "Kick":
 		isAttacking=true
+	if anim_name == "TakingDamage":
+		isTakingDamage=true
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Punch":
 		if enemyIsNear:
+			if enemy.actualLife-50<=0:
+				remove_observer(enemy)
 			enemy.take_damage(50)
 		isAttacking=false
 	if anim_name == "Kick":
 		if enemyIsNear:
+			if enemy.actualLife-200<=0:
+				remove_observer(enemy)
 			enemy.take_damage(200)
 		isAttacking=false
+	if anim_name == "TakingDamage":
+		isTakingDamage=false
 
 func save_game():
 	return {

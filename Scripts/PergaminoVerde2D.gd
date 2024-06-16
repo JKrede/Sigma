@@ -8,7 +8,6 @@ func _on_PergaminoVerde2D_body_entered(body):
 		# Si el cuerpo que entra no es el del jugador, no hacemos nada
 		pass
 
-
 func save_game():
 	return {
 		"filename" : get_filename(),
@@ -16,7 +15,7 @@ func save_game():
 		"x_pos" : position.x,
 		"y_pos" : position.y,
 		"stats" :{
-			"green" : Global.green
+		"green" : Global.green
 		}
 	}
 

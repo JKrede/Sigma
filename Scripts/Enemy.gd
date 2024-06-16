@@ -1,5 +1,5 @@
-extends KinematicBody2D
-
+extends Observer
+class_name Enemy
 const up = Vector2(0, -1)
 const gravity = 10
 const moveSpeed = 60
@@ -13,7 +13,10 @@ var playerAttack =false
 var player = null
 var actualLife=maxLife
 var isAlive=true
-var damage=10
+var isTakingDamage=false
+var damage=20
+var red=false
+
 var motion = Vector2()
 
 func _physics_process(delta):
@@ -23,13 +26,22 @@ func _physics_process(delta):
 	
 	motion()
 	attack()
-	live_check()
 	
 	move_and_slide(motion, up)
-	
+
+func update():
+	var sprite = $Sprite
+	if Global.actualLife<50:
+		sprite.modulate = Color(1, 0, 0)
+		damage = 10
+	if Global.actualLife>=50:
+		damage = 20
+		sprite.modulate = Color(1, 1, 1)
+	pass
+
 #se encarga del movimiento del enemigo: si el player esta dentro de la zona de deteccion lo sigue
 func motion():
-	if playerChase and not playerAttack and isAlive:
+	if playerChase and not playerAttack and isAlive and not isTakingDamage:
 		# Calcula la dirección unitaria hacia la posición X del jugador [el +1 para evitar division por 0]
 		motion.x=((player.position.x-position.x)/(abs(player.position.x-position.x)+1))* moveSpeed
 		
@@ -44,20 +56,47 @@ func motion():
 			sprite.flip_h = true
 			animationPlayer.play("Walk")
 			
-	elif not playerChase and not playerAttack and isAlive:
+	elif not playerChase and not playerAttack and isAlive and not isTakingDamage:
 		if motion.x==0:
 			animationPlayer.play("Idle")
 
 #Actualiza la vida del enemigo
 func take_damage(damageTaken):
+	animationPlayer.play("TakingDamage")
 	actualLife-=damageTaken
 	if actualLife<0:
 		actualLife=0
+	live_check()
 
 #verifica si el player esta en area de ataque y ataca
 func attack():
-	if playerAttack and isAlive:
+	if playerAttack and isAlive and not isTakingDamage:
 		animationPlayer.play("Attack")
+
+#Verifica si muere
+func live_check():
+	if actualLife==0:
+		isAlive=false
+	if not isAlive:
+		animationPlayer.play("Dead")
+		delete_enemy()
+
+#Borra el enemigo
+func delete_enemy():
+	yield(get_tree().create_timer(0.4), "timeout")
+	Global.contador_kills+=1
+	queue_free()
+
+func _on_AnimationPlayer_animation_started(anim_name):
+	if anim_name == "TakingDamage":
+		isTakingDamage=true
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Attack":
+		# Aquí puedes ejecutar las acciones que quieres realizar después de que la animación de ataque ha terminado
+		player.take_damage(damage)
+	if anim_name == "TakingDamage":
+		isTakingDamage=false
 
 #Signals of DetectionArea
 func _on_DetectionArea_body_entered(body):
@@ -71,25 +110,6 @@ func _on_AttackArea_body_entered(body):
 	playerAttack=true
 func _on_AttackArea_body_exited(body):
 	playerAttack=false
-
-#Borra el enemigo
-func delete_enemy():
-	yield(get_tree().create_timer(0.4), "timeout")
-	Global.contador_kills+=1
-	queue_free()
-
-#Verifica si muere
-func live_check():
-	if actualLife==0:
-		isAlive=false
-	if not isAlive:
-		animationPlayer.play("Dead")
-		delete_enemy()
-
-func _on_AnimationPlayer_animation_finished(animation_name):
-	if animation_name == "Attack":
-		# Aquí puedes ejecutar las acciones que quieres realizar después de que la animación de ataque ha terminado
-		player.take_damage(damage)
 
 func save_game():
 	return {

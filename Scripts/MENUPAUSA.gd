@@ -24,7 +24,7 @@ func show_and_hide(first, second):
 	second.hide()
 
 func _on_Men_Principal_pressed():
-	#get_tree().change_scene("res://ruta_de_tu_menu_principal.tscn")
+	get_tree().change_scene("res://Scenes/Menú.tscn")
 	pass # Replace with function body.
 
 func _on_Video_pressed():

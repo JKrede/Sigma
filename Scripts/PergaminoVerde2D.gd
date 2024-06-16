@@ -1,12 +1,22 @@
 extends Area2D
 
+var observers=[]
+
 func _on_PergaminoVerde2D_body_entered(body):
 	if body is Player:
-		Global.green = true
+		add_observer(body)
+		notify_observer()
 		queue_free()
-	else:
-		# Si el cuerpo que entra no es el del jugador, no hacemos nada
-		pass
+		
+func add_observer(o):
+	observers.append(o)
+
+func erase_observer(o):
+	observers.erase(o)
+
+func notify_observer():
+	for obs in observers:
+		obs.pergamino_verde_collected()
 
 
 func save_game():

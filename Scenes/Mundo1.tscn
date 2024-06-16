@@ -914,7 +914,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 47/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=27]
-extents = Vector2( 8386, 163.5 )
+extents = Vector2( 8901.5, 163.5 )
 
 [node name="Mundo" type="Node2D"]
 position = Vector2( 1543, -317 )
@@ -985,9 +985,10 @@ position = Vector2( 1057, -120 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="DeadArea" type="Area2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeadArea"]
-position = Vector2( 4457, 1246 )
+position = Vector2( 3684, 1201 )
 shape = SubResource( 27 )
 
 [node name="ScoreFullScrean" parent="." instance=ExtResource( 12 )]
@@ -1040,5 +1041,5 @@ position = Vector2( -769, 314 )
 [node name="Bebida" parent="." instance=ExtResource( 8 )]
 position = Vector2( -715, 320 )
 
-[node name="Enemy13" parent="." instance=ExtResource( 6 )]
-position = Vector2( -782, 140 )
+[connection signal="area_entered" from="DeadArea" to="Player" method="_on_DeadArea_area_entered"]
+[connection signal="body_entered" from="DeadArea" to="Player" method="_on_DeadArea_body_entered"]

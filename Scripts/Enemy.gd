@@ -80,10 +80,10 @@ func delete_enemy():
 func _on_AnimationPlayer_animation_started(anim_name):
 	if anim_name == "TakingDamage":
 		isTakingDamage=true
+		
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Attack":
-		# Aquí puedes ejecutar las acciones que quieres realizar después de que la animación de ataque ha terminado
 		player.take_damage(damage)
 	if anim_name == "TakingDamage":
 		isTakingDamage=false

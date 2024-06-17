@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Observer",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Scripts/Enemy.gd"
+}, {
 "base": "Reference",
 "class": "GutHookScript",
 "language": "GDScript",
@@ -20,14 +25,27 @@ _global_script_classes=[ {
 "path": "res://addons/gut/test.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Observer",
+"language": "GDScript",
+"path": "res://Scripts/Observer.gd"
+}, {
+"base": "Subject",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Subject",
+"language": "GDScript",
+"path": "res://Scripts/Subject.gd"
 } ]
 _global_script_class_icons={
+"Enemy": "",
 "GutHookScript": "",
 "GutTest": "",
-"Player": ""
+"Observer": "",
+"Player": "",
+"Subject": ""
 }
 
 [application]
@@ -97,6 +115,16 @@ ui_at2={
 pause={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
+}
+guardar={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":56,"unicode":0,"echo":false,"script":null)
+ ]
+}
+cargar={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":55,"unicode":0,"echo":false,"script":null)
  ]
 }
 

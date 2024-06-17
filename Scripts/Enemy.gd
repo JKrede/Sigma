@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 extends KinematicBody2D
+=======
+extends Observer
+class_name Enemy
+>>>>>>> Stashed changes
 
 const up = Vector2(0, -1)
 const gravity = 10

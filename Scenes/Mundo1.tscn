@@ -938,57 +938,61 @@ tile_data = PoolIntArray( -393124, 12, 0, -327623, 12, 0, -327588, 12, 0, -26206
 
 [node name="Enemy" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1527, 167 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2030, 93 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1882, 120 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy4" parent="." instance=ExtResource( 6 )]
 position = Vector2( -62, 305 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy5" parent="." instance=ExtResource( 6 )]
 position = Vector2( -1013, 199 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy6" parent="." instance=ExtResource( 6 )]
 position = Vector2( -874, 272 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy7" parent="." instance=ExtResource( 6 )]
 position = Vector2( -339, 266 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy8" parent="." instance=ExtResource( 6 )]
 position = Vector2( 222, 74 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy9" parent="." instance=ExtResource( 6 )]
 position = Vector2( 909, 123 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy10" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1192, -116 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy11" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1321, -135 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="Enemy12" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1057, -120 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1, 1 )
 
 [node name="DeadArea" type="Area2D" parent="."]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeadArea"]
+<<<<<<< Updated upstream
 position = Vector2( 3684, 1201 )
+=======
+position = Vector2( 4444, 748 )
+>>>>>>> Stashed changes
 shape = SubResource( 27 )
 
 [node name="ScoreFullScrean" parent="." instance=ExtResource( 12 )]
@@ -1007,6 +1011,7 @@ margin_right = 0.272034
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -1233, 300 )
+scale = Vector2( 1, 1 )
 
 [node name="Vida2D" parent="." instance=ExtResource( 16 )]
 position = Vector2( -1165, 302 )
@@ -1041,5 +1046,12 @@ position = Vector2( -769, 314 )
 [node name="Bebida" parent="." instance=ExtResource( 8 )]
 position = Vector2( -715, 320 )
 
+<<<<<<< Updated upstream
 [connection signal="area_entered" from="DeadArea" to="Player" method="_on_DeadArea_area_entered"]
+=======
+[node name="Enemy13" parent="." instance=ExtResource( 6 )]
+position = Vector2( -782, 140 )
+scale = Vector2( 1, 1 )
+
+>>>>>>> Stashed changes
 [connection signal="body_entered" from="DeadArea" to="Player" method="_on_DeadArea_body_entered"]

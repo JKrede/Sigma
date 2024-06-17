@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Observer",
-"class": "Enemy",
-"language": "GDScript",
-"path": "res://Scripts/Enemy.gd"
-}, {
 "base": "Reference",
 "class": "GutHookScript",
 "language": "GDScript",
@@ -25,27 +20,14 @@ _global_script_classes=[ {
 "path": "res://addons/gut/test.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Observer",
-"language": "GDScript",
-"path": "res://Scripts/Observer.gd"
-}, {
-"base": "Subject",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Subject",
-"language": "GDScript",
-"path": "res://Scripts/Subject.gd"
 } ]
 _global_script_class_icons={
-"Enemy": "",
 "GutHookScript": "",
 "GutTest": "",
-"Observer": "",
-"Player": "",
-"Subject": ""
+"Player": ""
 }
 
 [application]

@@ -1,21 +1,12 @@
 extends KinematicBody2D
 class_name Player
 
-<<<<<<< Updated upstream
-const moveSpeed=100
-const maxSpeed=150
-const jumpHeight=-310
-const gravity=10
-const up=Vector2(0,-1)
-const inicio=Vector2(1,1)
-=======
 const moveSpeed = 100
 const maxSpeed = 125
 const jumpHeight = -310
 const gravity = 10
 const up = Vector2(0, -1)
 const inicio = Vector2(1, 1)
->>>>>>> Stashed changes
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -30,37 +21,6 @@ var motion = Vector2()
 
 func _physics_process(delta):
 	
-<<<<<<< Updated upstream
-	if Input.is_action_pressed("ui_right") and not isAttacking:
-		sprite.flip_h=false
-		motion.x=min(motion.x+moveSpeed,maxSpeed)
-		
-	elif Input.is_action_pressed("ui_left") and not isAttacking:
-		sprite.flip_h=true
-		motion.x=max(motion.x-moveSpeed,-maxSpeed)
-		
-	else:
-		friction=true
-		
-	if is_on_floor():
-		if Input.is_action_pressed("ui_up") and not isAttacking:
-			motion.y=jumpHeight
-			animationPlayer.play("Jump")
-		if friction==true:
-			motion.x=lerp(motion.x,0,1)
-		if motion.x!=0:
-			animationPlayer.play("Walk")
-		
-		if motion.x==0 and not isAttacking and not isTakingDamage:
-			animationPlayer.play("Idle")
-		
-	else:
-		if friction==true:
-			motion.x=lerp(motion.x,0,1)
-		if motion.y<0 and not isAttacking:
-			animationPlayer.play("Fall")
-		
-=======
 	motion.y += gravity
 	var friction = false
 
@@ -90,21 +50,11 @@ func _physics_process(delta):
 		elif motion.y > 0 and not isAttacking and not isTakingDamage:
 			animationPlayer.play("Fall")
 
->>>>>>> Stashed changes
 	attack()
 	live_check()
 	motion = move_and_slide(motion, up)
 
 func attack():
-<<<<<<< Updated upstream
-	#Punch quita 50 de vida
-	if Input.is_action_pressed("ui_at1")  and not isAttacking:
-		animationPlayer.play("Punch")
-
-	#Kick quita 200 de vida
-	if Input.is_action_pressed("ui_at2") and not isAttacking:
-		animationPlayer.play("Kick")
-=======
 	if not isAttacking and not isTakingDamage and motion.x==0:
 		if Input.is_action_pressed("ui_at1"):
 			isAttacking = true
@@ -112,7 +62,6 @@ func attack():
 		elif Input.is_action_pressed("ui_at2"):
 			isAttacking = true
 			animationPlayer.play("Kick")
->>>>>>> Stashed changes
 
 func take_damage(damageTaken):
 	if isTakingDamage==false:
@@ -125,17 +74,10 @@ func live_check():
 	if Global.actualLife == 0:
 		isAlive = false
 	if not isAlive:
-<<<<<<< Updated upstream
-		Global.contador_vida-=1
-		if Global.contador_vida==0:
-			print("Game over putito")
-		Global.actualLife=Global.maxLife
-=======
 		Global.contador_vida -= 1
 		if Global.contador_vida == 0:
 			print("Game over")
 		Global.actualLife = Global.maxLife
->>>>>>> Stashed changes
 		set_global_position(inicio)
 		print(Global.contador_vida)
 		isAlive = true
@@ -190,9 +132,7 @@ func load_game(stats):
 	Global.contador_vida = stats.stats.contador_vida
 	Global.actualLife = stats.stats.actualLife
 	Global.contador_kills = stats.stats.contador_kills
-<<<<<<< Updated upstream
-=======
-
+	
 func _on_DeadArea_body_entered(body):
 	take_damage(1000)
->>>>>>> Stashed changes
+

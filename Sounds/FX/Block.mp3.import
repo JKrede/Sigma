@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Block.mp3-1819e334bc9cec4fa3af3e3507442e08.mp3str"
+
+[deps]
+
+source_file="res://Sounds/FX/Block.mp3"
+dest_files=[ "res://.import/Block.mp3-1819e334bc9cec4fa3af3e3507442e08.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,22 @@
+name: Godot Unit Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Download Godot
+      run: |
+        GODOT_VERSION=3.5.3
+        wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_server.64.zip
+        unzip Godot_v${GODOT_VERSION}-stable_linux_server.64.zip
+        sudo mv Godot_v${GODOT_VERSION}-stable_linux_server.64 /usr/local/bin/godot
+
+    - name: Run unit tests
+      run: |
+        godot --path . -s res://addons/gut/gut_cmdln.gd -gselect="res://Test/Unit" -ginclude_subdirs -gexit

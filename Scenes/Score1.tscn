@@ -1,0 +1,261 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Sprites/Sprite de coleccionables/coin_gold.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Sprite de coleccionables/pergaminos.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Sprite de coleccionables/heart.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Sprite de coleccionables/craneo.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Sprite de coleccionables/barra.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Sprite de coleccionables/coin_silver.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/Score1.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Vida"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Coin"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Coin"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[node name="Score" type="CanvasLayer"]
+script = ExtResource( 7 )
+
+[node name="Vida" type="Sprite" parent="."]
+modulate = Color( 1, 0, 0.188235, 1 )
+position = Vector2( 43.7, 564.2 )
+scale = Vector2( 2.5875, 2.525 )
+texture = ExtResource( 3 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Vida"]
+autoplay = "Vida"
+anims/RESET = SubResource( 1 )
+anims/Vida = SubResource( 2 )
+
+[node name="Vida2" type="Label" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 62.0
+margin_top = 544.0
+margin_right = 102.0
+margin_bottom = 569.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "x01"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="barra1" type="Sprite" parent="."]
+position = Vector2( 314.375, 571.25 )
+scale = Vector2( 0.692495, 0.415 )
+texture = ExtResource( 5 )
+vframes = 2
+
+[node name="barra2" type="Sprite" parent="barra1"]
+position = Vector2( 0.902509, 10.6249 )
+scale = Vector2( 1.00774, 1.0125 )
+texture = ExtResource( 5 )
+vframes = 2
+frame = 1
+
+[node name="CoinPlata" type="Sprite" parent="."]
+position = Vector2( 702, 564 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CoinPlata"]
+autoplay = "Coin"
+anims/Coin = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[node name="CoinPlata2" type="Label" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 719.0
+margin_top = 542.0
+margin_right = 747.0
+margin_bottom = 566.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "x01"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="CoinOro" type="Sprite" parent="."]
+modulate = Color( 0.941176, 1, 0, 1 )
+self_modulate = Color( 0.941176, 1, 0, 1 )
+position = Vector2( 800, 564 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CoinOro"]
+autoplay = "Coin"
+anims/Coin = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+
+[node name="CoinOro2" type="Label" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 824.0
+margin_top = 544.0
+margin_right = 852.0
+margin_bottom = 568.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "x01"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Kills" type="Sprite" parent="."]
+position = Vector2( 906, 565 )
+scale = Vector2( 0.16, 0.16 )
+texture = ExtResource( 4 )
+
+[node name="Kills2" type="Label" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 931.0
+margin_top = 542.0
+margin_right = 959.0
+margin_bottom = 566.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "x01"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="PergaminoRojo" type="Sprite" parent="."]
+position = Vector2( 523, 564 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="PergaminoAmarillo" type="Sprite" parent="."]
+position = Vector2( 561, 563 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+hframes = 4
+frame = 1
+
+[node name="PergaminoVerde" type="Sprite" parent="."]
+position = Vector2( 598, 565 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+hframes = 4
+frame = 2
+
+[node name="PergaminoAzul" type="Sprite" parent="."]
+position = Vector2( 632, 563 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+hframes = 4
+frame = 3

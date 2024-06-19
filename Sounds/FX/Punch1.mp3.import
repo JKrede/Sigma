@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Punch1.mp3-fa554eb0f3a89ab0f3bb0091692ba93e.mp3str"
+
+[deps]
+
+source_file="res://Sounds/FX/Punch1.mp3"
+dest_files=[ "res://.import/Punch1.mp3-fa554eb0f3a89ab0f3bb0091692ba93e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

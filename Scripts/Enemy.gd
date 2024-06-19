@@ -1,6 +1,5 @@
 extends Observer
 class_name Enemy
-
 const up = Vector2(0, -1)
 const gravity = 10
 const moveSpeed = 60

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Onepunch Man - The Hero FULL.mp3-87c3ca2181b37ccc3c5a0c7a711b1623.mp3str"
+
+[deps]
+
+source_file="res://Sounds/FX/Onepunch Man - The Hero FULL.mp3"
+dest_files=[ "res://.import/Onepunch Man - The Hero FULL.mp3-87c3ca2181b37ccc3c5a0c7a711b1623.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

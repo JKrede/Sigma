@@ -1,23 +1,12 @@
 extends Area2D
 
-var observers=[]
-
 func _on_PergaminoVerde2D_body_entered(body):
 	if body is Player:
-		add_observer(body)
-		notify_observer()
+		Global.green = true
 		queue_free()
-		
-func add_observer(o):
-	observers.append(o)
-
-func erase_observer(o):
-	observers.erase(o)
-
-func notify_observer():
-	for obs in observers:
-		obs.pergamino_verde_collected()
-
+	else:
+		# Si el cuerpo que entra no es el del jugador, no hacemos nada
+		pass
 
 func save_game():
 	return {
@@ -26,7 +15,7 @@ func save_game():
 		"x_pos" : position.x,
 		"y_pos" : position.y,
 		"stats" :{
-			"green" : Global.green
+		"green" : Global.green
 		}
 	}
 

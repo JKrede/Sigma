@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Sprites de Garou/Garou_saltando.png" type="Texture" id=1]
 [ext_resource path="res://Sprites de Garou/Garou_ataque1.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=6]
 [ext_resource path="res://Sprites de Garou/Garou_cayendo.png" type="Texture" id=7]
 [ext_resource path="res://Sprites de Garou/Garou_recibiendo_daño.png" type="Texture" id=8]
+[ext_resource path="res://Sounds/FX/Punch3.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/FX/Punch2.mp3" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 15, 30 )
@@ -15,7 +17,6 @@ extents = Vector2( 15, 30 )
 [sub_resource type="Animation" id=13]
 resource_name = "Fall"
 length = 0.2
-step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -174,7 +175,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "Kick"
-step = 0.125
+length = 0.6
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -218,7 +220,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
@@ -226,17 +228,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "Punch"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-step = 0.08
-=======
-length = 0.6
-step = 0.05
->>>>>>> Stashed changes
-=======
-length = 0.6
-step = 0.05
->>>>>>> Stashed changes
+length = 0.4
+step = 0.033
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -280,15 +273,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64, 0.72, 0.8, 0.88 ),
-=======
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55 ),
->>>>>>> Stashed changes
-=======
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55 ),
->>>>>>> Stashed changes
+"times": PoolRealArray( 0, 0.033, 0.066, 0.099, 0.132, 0.165, 0.198, 0.231, 0.264, 0.297, 0.33, 0.363 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
@@ -452,7 +437,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 45.1895, 18 )
+extents = Vector2( 36.4431, 18 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["save"]]
 position = Vector2( 13, -36 )
@@ -501,11 +486,18 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2( 4.69388, -10 )
+position = Vector2( 2.65306, -10 )
 scale = Vector2( 0.7, 0.7 )
 shape = SubResource( 14 )
 
-[connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_changed"]
+[node name="PunchFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -15.0
+
+[node name="KickFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -15.0
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]

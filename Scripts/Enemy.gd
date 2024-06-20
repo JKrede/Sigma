@@ -1,15 +1,10 @@
-<<<<<<< Updated upstream
-extends KinematicBody2D
-=======
 extends Observer
 class_name Enemy
->>>>>>> Stashed changes
 
 const up = Vector2(0, -1)
 const gravity = 10
 const moveSpeed = 60
 const maxLife=200
-
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -20,7 +15,8 @@ var player = null
 var actualLife=maxLife
 var isAlive=true
 var isTakingDamage=false
-var damage=10
+var damage=20
+var red=false
 
 var motion = Vector2()
 
@@ -33,7 +29,17 @@ func _physics_process(delta):
 	attack()
 	
 	move_and_slide(motion, up)
-	
+
+func update():
+	var sprite = $Sprite
+	if Global.actualLife<50:
+		sprite.modulate = Color(1, 0, 0)
+		damage = 10
+	if Global.actualLife>=50:
+		damage = 20
+		sprite.modulate = Color(1, 1, 1)
+	pass
+
 #se encarga del movimiento del enemigo: si el player esta dentro de la zona de deteccion lo sigue
 func motion():
 	if playerChase and not playerAttack and isAlive and not isTakingDamage:
@@ -85,10 +91,10 @@ func delete_enemy():
 func _on_AnimationPlayer_animation_started(anim_name):
 	if anim_name == "TakingDamage":
 		isTakingDamage=true
-		
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Attack":
+		# Aquí puedes ejecutar las acciones que quieres realizar después de que la animación de ataque ha terminado
 		player.take_damage(damage)
 	if anim_name == "TakingDamage":
 		isTakingDamage=false

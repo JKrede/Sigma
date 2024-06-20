@@ -8,7 +8,6 @@ func _on_ComenzarButton_pressed():
 
 
 func _on_ContinuarButton_pressed():
-	#$"/root/Save".load_juego()
 	pass
 
 func _on_OpcionesButton_pressed():
@@ -17,3 +16,6 @@ func _on_OpcionesButton_pressed():
 
 func _on_SalirButton_pressed():
 	get_tree().quit()
+	
+
+

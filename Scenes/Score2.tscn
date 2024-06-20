@@ -109,7 +109,7 @@ script = ExtResource( 7 )
 
 [node name="Vida" type="Sprite" parent="."]
 modulate = Color( 1, 0, 0.188235, 1 )
-position = Vector2( 262.7, 657.2 )
+position = Vector2( 168.7, 641.2 )
 scale = Vector2( 2.5875, 2.525 )
 texture = ExtResource( 1 )
 hframes = 3
@@ -121,10 +121,10 @@ anims/Vida = SubResource( 2 )
 
 [node name="Vida2" type="Label" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 281.0
-margin_top = 637.0
-margin_right = 321.0
-margin_bottom = 662.0
+margin_left = 187.0
+margin_top = 621.0
+margin_right = 227.0
+margin_bottom = 646.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -138,7 +138,7 @@ valign = 1
 max_lines_visible = 1
 
 [node name="barra1" type="Sprite" parent="."]
-position = Vector2( 533.375, 664.25 )
+position = Vector2( 439.375, 648.25 )
 scale = Vector2( 0.692495, 0.415 )
 texture = ExtResource( 4 )
 vframes = 2
@@ -151,7 +151,7 @@ vframes = 2
 frame = 1
 
 [node name="CoinPlata" type="Sprite" parent="."]
-position = Vector2( 921, 657 )
+position = Vector2( 827, 641 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 hframes = 8
@@ -163,10 +163,10 @@ anims/RESET = SubResource( 4 )
 
 [node name="CoinPlata2" type="Label" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 938.0
-margin_top = 635.0
-margin_right = 966.0
-margin_bottom = 659.0
+margin_left = 844.0
+margin_top = 619.0
+margin_right = 872.0
+margin_bottom = 643.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -182,7 +182,7 @@ max_lines_visible = 1
 [node name="CoinOro" type="Sprite" parent="."]
 modulate = Color( 0.941176, 1, 0, 1 )
 self_modulate = Color( 0.941176, 1, 0, 1 )
-position = Vector2( 1019, 657 )
+position = Vector2( 925, 641 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )
 hframes = 8
@@ -194,10 +194,10 @@ anims/RESET = SubResource( 6 )
 
 [node name="CoinOro2" type="Label" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 1043.0
-margin_top = 637.0
-margin_right = 1071.0
-margin_bottom = 661.0
+margin_left = 949.0
+margin_top = 621.0
+margin_right = 977.0
+margin_bottom = 645.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -211,16 +211,16 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Kills" type="Sprite" parent="."]
-position = Vector2( 1125, 658 )
+position = Vector2( 1031, 642 )
 scale = Vector2( 0.16, 0.16 )
 texture = ExtResource( 5 )
 
 [node name="Kills2" type="Label" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 1150.0
-margin_top = 635.0
-margin_right = 1178.0
-margin_bottom = 659.0
+margin_left = 1056.0
+margin_top = 619.0
+margin_right = 1084.0
+margin_bottom = 643.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -234,27 +234,27 @@ valign = 1
 max_lines_visible = 1
 
 [node name="PergaminoRojo" type="Sprite" parent="."]
-position = Vector2( 742, 657 )
+position = Vector2( 648, 641 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 hframes = 4
 
 [node name="PergaminoAmarillo" type="Sprite" parent="."]
-position = Vector2( 780, 656 )
+position = Vector2( 686, 640 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 hframes = 4
 frame = 1
 
 [node name="PergaminoVerde" type="Sprite" parent="."]
-position = Vector2( 817, 658 )
+position = Vector2( 723, 642 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 hframes = 4
 frame = 2
 
 [node name="PergaminoAzul" type="Sprite" parent="."]
-position = Vector2( 851, 656 )
+position = Vector2( 757, 640 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 hframes = 4

@@ -4,12 +4,12 @@ var nombre_instancia = get_name()
 
 func _process(delta):
 	if OS.is_window_maximized() or OS.is_window_fullscreen():
-		if get_name() != "ScoreFullScrean":
+		if get_name() != "Score2":
 			visible = false
 		else:
 			visible = true
 	else:
-		if get_name() != "ScoreFullScrean":
+		if get_name() != "Score1":
 			visible = true
 		else:
 			visible = false

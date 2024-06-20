@@ -1,30 +1,12 @@
-extends KinematicBody2D
+extends Subject
 class_name Player
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-const moveSpeed=100
-const maxSpeed=150
-const jumpHeight=-310
-const gravity=10
-const up=Vector2(0,-1)
-const inicio=Vector2(1,1)
-=======
-=======
->>>>>>> Stashed changes
 const moveSpeed = 100
-const maxSpeed = 125
-const jumpHeight = -310
+const maxSpeed = 130
+const jumpHeight = -350
 const gravity = 10
-<<<<<<< Updated upstream
 const up = Vector2(0, -1)
 const inicio = Vector2(1, 1)
->>>>>>> Stashed changes
-=======
-const up = Vector2(0,-1)
-const inicio = Vector2(1,1)
-
->>>>>>> Stashed changes
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -35,61 +17,10 @@ var isAlive = true # Indica si el jugador está vivo
 var isAttacking = false # Indica si el pj está atacando
 var isTakingDamage = false # Indica si el pj está siendo atacado
 
-<<<<<<< Updated upstream
 var motion = Vector2()
-=======
-var motion=Vector2()
->>>>>>> Stashed changes
 
 func _physics_process(delta):
 	
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	if Input.is_action_pressed("ui_right") and not isAttacking:
-		sprite.flip_h=false
-		motion.x=min(motion.x+moveSpeed,maxSpeed)
-		
-	elif Input.is_action_pressed("ui_left") and not isAttacking:
-		sprite.flip_h=true
-		motion.x=max(motion.x-moveSpeed,-maxSpeed)
-		
-	else:
-		friction=true
-		
-=======
-	motion.y += gravity
-	var friction = false
-
-	if not isAttacking and not isTakingDamage:
-		if Input.is_action_pressed("ui_right"):
-			sprite.flip_h = false
-			motion.x = min(motion.x + moveSpeed, maxSpeed)
-		elif Input.is_action_pressed("ui_left"):
-			sprite.flip_h = true
-			motion.x = max(motion.x - moveSpeed, -maxSpeed)
-		else:
-			friction = true
-
->>>>>>> Stashed changes
-	if is_on_floor():
-		if Input.is_action_pressed("ui_up") and not isAttacking:
-			motion.y=jumpHeight
-			animationPlayer.play("Jump")
-		if friction==true:
-			motion.x=lerp(motion.x,0,1)
-		if motion.x!=0:
-			animationPlayer.play("Walk")
-		
-		if motion.x==0 and not isAttacking and not isTakingDamage:
-			animationPlayer.play("Idle")
-		
-	else:
-		if friction==true:
-			motion.x=lerp(motion.x,0,1)
-		if motion.y<0 and not isAttacking:
-			animationPlayer.play("Fall")
-		
-=======
 	motion.y += gravity
 	var friction = false
 
@@ -119,35 +50,22 @@ func _physics_process(delta):
 		elif motion.y > 0 and not isAttacking and not isTakingDamage:
 			animationPlayer.play("Fall")
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 	attack()
 	live_check()
 	motion = move_and_slide(motion, up)
 
 func attack():
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	#Punch quita 50 de vida
-	if Input.is_action_pressed("ui_at1")  and not isAttacking:
-		animationPlayer.play("Punch")
-
-	#Kick quita 200 de vida
-	if Input.is_action_pressed("ui_at2") and not isAttacking:
-		animationPlayer.play("Kick")
-=======
-=======
->>>>>>> Stashed changes
 	if not isAttacking and not isTakingDamage and motion.x==0:
 		if Input.is_action_pressed("ui_at1"):
 			isAttacking = true
+			$PunchFX.stream.loop=false
+			$PunchFX.play()
 			animationPlayer.play("Punch")
 		elif Input.is_action_pressed("ui_at2"):
 			isAttacking = true
+			$KickFX.stream.loop=false
+			$KickFX.play()
 			animationPlayer.play("Kick")
->>>>>>> Stashed changes
 
 func take_damage(damageTaken):
 	if isTakingDamage==false:
@@ -157,29 +75,20 @@ func take_damage(damageTaken):
 			Global.actualLife = 0
 
 func live_check():
-	if Global.actualLife == 0:
-		isAlive = false
+	if Global.actualLife==0:
+		isAlive=false
 	if not isAlive:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 		Global.contador_vida-=1
 		if Global.contador_vida==0:
-			print("Game over putito")
-		Global.actualLife=Global.maxLife
-=======
-=======
->>>>>>> Stashed changes
-		Global.contador_vida -= 1
-		if Global.contador_vida == 0:
 			print("Game over")
-		Global.actualLife = Global.maxLife
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+		Global.actualLife=Global.maxLife
 		set_global_position(inicio)
 		print(Global.contador_vida)
-		isAlive = true
+		isAlive=true
+	if Global.actualLife<50:
+		notify_observers()
+	if Global.actualLife>=50:
+		notify_observers()
 
 func _on_AttackArea_body_entered(body):
 	enemy = body
@@ -197,16 +106,31 @@ func _on_AnimationPlayer_animation_started(anim_name):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Punch":
-		if enemyIsNear and enemy:
+		if enemyIsNear:
+			if enemy.actualLife-50<=0:
+				remove_observer(enemy)
 			enemy.take_damage(50)
-		isAttacking = false
-	elif anim_name == "Kick":
-		if enemyIsNear and enemy:
+		isAttacking=false
+	if anim_name == "Kick":
+		if enemyIsNear:
+			if enemy.actualLife-200<=0:
+				remove_observer(enemy)
 			enemy.take_damage(200)
-		isAttacking = false
-	elif anim_name == "TakingDamage":
-		isTakingDamage = false
+		isAttacking=false
+	if anim_name == "TakingDamage":
+		isTakingDamage=false
+
+func _on_DeadArea_body_entered(body):
+	if not body is Enemy:
+		take_damage(1000)
 		
+func _ready():
+	var Mundo = get_parent()
+	if Mundo:
+		for child in Mundo.get_children():
+			if child is Enemy:
+				add_observer(child)
+
 func save_game():
 	return {
 		"filename" : get_filename(),
@@ -221,9 +145,7 @@ func save_game():
 			"contador_kills" : Global.contador_kills,
 		}
 	}
-func pergamino_verde_collected():
-	Global.green = true
-	
+
 func load_game(stats):
 	position = Vector2(stats.x_pos, stats.y_pos)
 	Global.contador_oro = stats.stats.contador_oro
@@ -231,16 +153,9 @@ func load_game(stats):
 	Global.contador_vida = stats.stats.contador_vida
 	Global.actualLife = stats.stats.actualLife
 	Global.contador_kills = stats.stats.contador_kills
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-
-func _on_DeadArea_body_entered(body):
-	take_damage(1000)
->>>>>>> Stashed changes
-=======
 	
-func _on_DeadArea_body_entered(body):
-		if not body is Enemy:
-			take_damage(1000)
->>>>>>> Stashed changes
+
+
+func _on_Level_up_area_body_entered(body):
+	if not body is Enemy:
+		get_tree().change_scene("res://Scenes/Mundo2.tscn")
